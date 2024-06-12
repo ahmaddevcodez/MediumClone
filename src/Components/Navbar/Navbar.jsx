@@ -9,7 +9,7 @@ const Navbar = () => {
 
   const handleScroll = () => {
     const offset = window.scrollY;
-    setScrolled(offset > 500);
+    setScrolled(offset > 390);
   };
 
   useEffect(() => {
