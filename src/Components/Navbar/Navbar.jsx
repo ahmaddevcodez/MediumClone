@@ -29,13 +29,13 @@ const Navbar = () => {
     <div className="relative">
       <div
         className={cn(
-          `border-b-[1px] border-primarygrey fixed top-0 z-50 transition backdrop-filter w-[100vw]`,
+          `border-b-[1px] border-primarygrey duration-900 ease-in-out fixed top-0 z-50 transition-all backdrop-filter w-full bg-primarybody`,
           scrolled
-            ? "backdrop-blur-md bg-opacity-50 bg-primarywhite"
-            : "bg-opacity-100"
+            ? "bg-primarywhite transition-all duration-900 ease-in-out"
+            : " transition-all duration-900 ease-in-out"
         )}
       >
-        <div className="flex justify-between items-center text-center mt-5 my-container mb-4">
+        <div className="flex justify-between items-center text-center pt-5 my-container pb-4">
           <Logo />
           <div className="flex items-center gap-6">
             <ul className="flex gap-5">
@@ -43,7 +43,7 @@ const Navbar = () => {
                 <li key={id} className="lg:flex hidden">
                   <a
                     href={link}
-                    className="navbar-font cursor-pointer text-sm font-semibold text-primarynav"
+                    className="second-font cursor-pointer text-sm font-medium text-primarynav"
                   >
                     {name}
                   </a>
@@ -52,18 +52,17 @@ const Navbar = () => {
               <li className="lg:flex md:flex hidden">
                 <a
                   href="/"
-                  className="navbar-font cursor-pointer text-sm font-semibold text-primarynav"
+                  className="second-font cursor-pointer text-sm font-medium text-primarynav"
                 >
                   Sign in
                 </a>
               </li>
             </ul>
             <Button
-              className={`rounded-full navbar-font ${
-                scrolled
-                  ? "bg-primarygreen transition-all duration-300 ease-in-out"
-                  : ""
-              }`}
+              className={cn(
+                "rounded-full second-font transition-all duration-900 ease-in-sout",
+                scrolled ? "bg-primarygreen hover:bg-primarydarkgreen" : ""
+              )}
               variant="mybutton"
             >
               Get started

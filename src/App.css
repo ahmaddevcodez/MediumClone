@@ -1,8 +1,34 @@
 @import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
 body {
-  font-family: "EB Garamond", serif;
+  font-family: gt-super, Georgia, Cambria, "Times New Roman", Times, serif;
+
 }
-.navbar-font {
-  font-family: "Raleway", sans-serif;
+
+.second-font {
+  font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.light {
+  font-weight: lighter !important;
+}
+
+.hover-arrow:hover .arrow {
+  transform: translateX(20px);
+  transition: transform 0.3s ease-in-out;
+}
+
+.arrow {
+  transition: transform 0.3s ease-in-out;
+}
+
+.div-animate {
+  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+}
+
+.div-animate:hover {
+  transition: transform 0.5s ease-in-out;
+  opacity: 1;
+  transform: scale(1);
 }
