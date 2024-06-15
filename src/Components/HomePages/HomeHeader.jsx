@@ -1,4 +1,11 @@
 import React from "react";
+import SignUp from "../Common/SignUp";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTrigger,
+} from "../ui/dialog";
 import { Button } from "../ui/button";
 
 const HomeHeader = () => {
@@ -12,12 +19,22 @@ const HomeHeader = () => {
           <p className="text-[24px] tracking-tight text-primarygrey font-normal second-font mb-8">
             A place to read, write, and deepen your understanding
           </p>
-          <Button
-            className="py-[22px] px-[20px] font-medium text-[20px] rounded-full second-font transition-all duration-900 ease-in-sout w-[198px]"
-            variant="mybutton"
-          >
-            Start Reading
-          </Button>
+          <Dialog className="shadow-xl">
+            <DialogTrigger asChild>
+              <Button
+                className="py-[22px] px-[20px] font-medium text-[20px] rounded-full second-font transition-all duration-900 ease-in-sout w-[198px]"
+                variant="mybutton"
+              >
+                Start Reading
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[670px] ">
+              <DialogHeader>
+                <SignUp />
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
+
           <div className="absolute top-[90px] right-0 lg:block hidden">
             <img
               src="/public/assets/images/home-page/Home-page-image-1.webp"

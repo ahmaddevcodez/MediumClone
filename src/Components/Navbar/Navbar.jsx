@@ -3,7 +3,14 @@ import { v4 as uuidv4 } from "uuid";
 import Logo from "../Common/Logo";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
-
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTrigger,
+} from "../ui/dialog";
+import SignIn from "../Common/SignIn";
+import SignUp from "../Common/SignUp";
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
 
@@ -22,7 +29,6 @@ const Navbar = () => {
   const links = [
     { id: uuidv4(), name: "Our story", link: "/" },
     { id: uuidv4(), name: "Membership", link: "/" },
-    { id: uuidv4(), name: "Write", link: "/" },
   ];
 
   return (
@@ -49,24 +55,53 @@ const Navbar = () => {
                   </a>
                 </li>
               ))}
-              <li className="lg:flex md:flex hidden">
-                <a
-                  href="/"
-                  className="second-font cursor-pointer text-sm font-medium text-primarynav"
-                >
-                  Sign in
-                </a>
-              </li>
+              <Dialog className="shadow-xl">
+                <DialogTrigger asChild>
+                  <li className="lg:flex md:flex hidden">
+                    <span className="second-font cursor-pointer text-sm font-medium text-primarynav">
+                      Write
+                    </span>
+                  </li>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[670px] ">
+                  <DialogHeader>
+                    <SignUp />
+                  </DialogHeader>
+                </DialogContent>
+              </Dialog>{" "}
+              <Dialog className="shadow-xl">
+                <DialogTrigger asChild>
+                  <li className="lg:flex md:flex hidden">
+                    <span className="second-font cursor-pointer text-sm font-medium text-primarynav">
+                      Sign in
+                    </span>
+                  </li>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[670px] ">
+                  <DialogHeader>
+                    <SignIn />
+                  </DialogHeader>
+                </DialogContent>
+              </Dialog>
             </ul>
-            <Button
-              className={cn(
-                "rounded-full second-font transition-all duration-900 ease-in-sout",
-                scrolled ? "bg-primarygreen hover:bg-primarydarkgreen" : ""
-              )}
-              variant="mybutton"
-            >
-              Get started
-            </Button>
+            <Dialog className="shadow-xl">
+              <DialogTrigger asChild>
+                <Button
+                  className={cn(
+                    "rounded-full second-font transition-all duration-900 ease-in-sout",
+                    scrolled ? "bg-primarygreen hover:bg-primarydarkgreen" : ""
+                  )}
+                  variant="mybutton"
+                >
+                  Get started
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[670px] ">
+                <DialogHeader>
+                  <SignUp />
+                </DialogHeader>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
       </div>

@@ -20,6 +20,8 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         mybutton:
           "font-medium bg-primarygrey text-primarywhite rounded-lg hover:bg-primaryblack pt-1 pb-1",
+        authbutton:
+          "w-[300px] font-medium border-primarygrey bg-transparent text-primarygrey rounded-full pt-1 pb-1",
       },
       size: {
         default: "h-10 px-4 py-2",
