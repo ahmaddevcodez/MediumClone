@@ -63,7 +63,10 @@ const SignUp = () => {
             <div className="pb-36">
               <h1 className="second-font">
                 Already have an account?
-                <a href={<LogIn />} className="text-primaryextradarkgreen ml-1 hover:text-primarydarkgreen font-semibold">
+                <a
+                  href={<LogIn />}
+                  className="text-primaryextradarkgreen ml-1 hover:text-primarydarkgreen font-semibold"
+                >
                   Sign in
                 </a>
               </h1>
@@ -166,19 +169,19 @@ const SignUp = () => {
             {/* Subtitle with instructions for the user */}
             <div className="mb-[25px]">
               <h1 className="font-medium text-base text-primaryblack second-font text-center">
-                Click the link we sent to <br /> ahmadTahir1399@gmail.com to sign in.              </h1>
+                Click the link we sent to <br /> ahmadTahir1399@gmail.com to
+                sign in.{" "}
+              </h1>
             </div>
             <a href="/">
               <Button
                 className="bg-primaryblack second-font rounded-full py-2 h-[40px] "
                 variant="mybutton"
-
               >
                 ok
               </Button>
             </a>
           </div>
-
         </div>
       );
     }
