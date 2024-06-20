@@ -72,13 +72,16 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
 }
-body {
+
+.main-home {
   background-color: hsl(var(--mainbody));
 }
+
 .my-container {
   width: 90%;
   max-width: 1200px;

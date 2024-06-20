@@ -79,7 +79,7 @@ const Footer = () => {
   ];
 
   return (
-    <div className="border-t-[1px] border-primarygrey pt-6 pb-5 lg:bg-primarybody bg-primaryblack">
+    <div className="border-t-[1px] border-primarygrey pt-6 pb-5 lg:bg-primarybody md:bg-primaryblack bg-primaryblack">
       <div className="my-container">
         <Logo className="mb-4 lg:hidden block fill-white" />
         <div>

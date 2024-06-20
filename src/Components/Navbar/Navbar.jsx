@@ -13,7 +13,7 @@ import SignIn from "../Common/SignIn";
 import SignUp from "../Common/SignUp";
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
-
+  const [authentication, setAuthentication] = useState(false);
   const handleScroll = () => {
     const offset = window.scrollY;
     setScrolled(offset > 390);
@@ -35,10 +35,10 @@ const Navbar = () => {
     <div className="relative">
       <div
         className={cn(
-          `border-b-[1px] border-primarygrey duration-900 ease-in-out fixed top-0 z-50 transition-all backdrop-filter w-full bg-primarybody`,
+          `bg-primarybody border-b-[1px] border-primarygrey duration-900 ease-in-out fixed top-0 z-50 transition-all backdrop-filter w-full`,
           scrolled
             ? "bg-primarywhite transition-all duration-900 ease-in-out"
-            : " transition-all duration-900 ease-in-out"
+            : "bg-primarybody transition-all duration-900 ease-in-out "
         )}
       >
         <div className="flex justify-between items-center text-center pt-5 my-container pb-4">
@@ -84,24 +84,30 @@ const Navbar = () => {
                 </DialogContent>
               </Dialog>
             </ul>
-            <Dialog className="shadow-xl">
-              <DialogTrigger asChild>
-                <Button
-                  className={cn(
-                    "rounded-full second-font transition-all duration-900 ease-in-sout",
-                    scrolled ? "bg-primarygreen hover:bg-primarydarkgreen" : ""
-                  )}
-                  variant="mybutton"
-                >
-                  Get started
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[670px] ">
-                <DialogHeader>
-                  <SignUp />
-                </DialogHeader>
-              </DialogContent>
-            </Dialog>
+            {authentication ? (
+              Good
+            ) : (
+              <Dialog className="shadow-xl">
+                <DialogTrigger asChild>
+                  <Button
+                    className={cn(
+                      "rounded-full second-font transition-all duration-900 ease-in-sout",
+                      scrolled
+                        ? "bg-primarygreen hover:bg-primarydarkgreen"
+                        : ""
+                    )}
+                    variant="mybutton"
+                  >
+                    Get started
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-[670px] ">
+                  <DialogHeader>
+                    <SignUp />
+                  </DialogHeader>
+                </DialogContent>
+              </Dialog>
+            )}
           </div>
         </div>
       </div>

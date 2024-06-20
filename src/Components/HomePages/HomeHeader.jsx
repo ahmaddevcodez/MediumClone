@@ -10,7 +10,7 @@ import { Button } from "../ui/button";
 
 const HomeHeader = () => {
   return (
-    <div className="border-b-[1px] border-primarygrey">
+    <div className="border-b-[1px] border-primarygrey mt-[70px]">
       <div className="p-1 pb-28 my-container">
         <div className="flex flex-col justify-center col-span-2">
           <h1 className="2xl:text-[135px] xl:text-[125px] lg:text-[115px] md:text-[105px] text-[90px] tracking-tight leading-[100px] text-primarygrey font-medium mb-11 mt-28">
@@ -37,7 +37,7 @@ const HomeHeader = () => {
 
           <div className="absolute top-[90px] right-0 lg:block hidden">
             <img
-              src="/public/assets/images/home-page/Home-page-image-1.webp"
+              src=" /assets/images/home-page/Home-page-image-1.webp"
               alt=""
               className="w-[445px] h-[570px]"
             />

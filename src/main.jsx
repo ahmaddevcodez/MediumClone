@@ -2,15 +2,38 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
-// import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./Components/store/store.js";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import Home from "./Pages/Home.jsx";
+import UserNameInfo from "./Components/UserName/UserNameInfo.jsx";
+import AuthLayout from "./Pages/AuthLayout.jsx";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/UserNameInfo",
+        element: (
+          <AuthLayout authentication={false}>
+            <UserNameInfo />
+          </AuthLayout>
+        ),
+      },
+    ],
+  },
+]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    {/* <Router> */}
-    {/* <Routes> */}
-    {/* <Route path="/" element={<HomePage />} /> */}
-    <App />
-    {/* </Routes> */}
-    {/* </Router> */}
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );

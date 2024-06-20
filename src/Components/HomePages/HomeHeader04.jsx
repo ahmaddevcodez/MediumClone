@@ -18,7 +18,7 @@ const HomeHeader04 = () => {
                 Unlock a world of wisdom
               </h1>
               <img
-                src="/public/assets/images/home-page/arrow.png"
+                src=" /assets/images/home-page/arrow.png"
                 className="arrow ml-10 mt-3 w-[100px]"
                 alt=""
               />

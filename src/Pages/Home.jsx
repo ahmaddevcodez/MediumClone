@@ -9,9 +9,9 @@ import Footer from "@/Components/Footer/Footer";
 
 const Home = () => {
   return (
-    <div>
-      <div className="mb-[100px]">
-        <Navbar />
+    <div className="main-home">
+      <div className="mb-[0px]">
+        <Navbar className="bg-primarybody" />
       </div>
       <HomeHeader />
       <div className="2xl:block xl:block lg:block md:hidden hidden ">
