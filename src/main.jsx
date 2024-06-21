@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 import { Provider } from "react-redux";
-import store from "./Components/store/store.js";
+import store from "./store/store.js";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./Pages/Home.jsx";
 import UserNameInfo from "./Components/UserName/UserNameInfo.jsx";
@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       {
         path: "/UserNameInfo",
         element: (
-          <AuthLayout authentication={false}>
+          <AuthLayout authentication={true}>
             <UserNameInfo />
           </AuthLayout>
         ),

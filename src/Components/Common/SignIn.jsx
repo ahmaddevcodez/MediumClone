@@ -1,22 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Icons from "./Icons";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { ChevronUp } from "lucide-react";
+import { ChevronUp, LogIn } from "lucide-react";
+import authService from "../../supabase/auth";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
   const [hide, setHide] = useState(true);
   const [hide1, setHide1] = useState(true);
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+
+  // useEffect(() => {
+  //   handleContinue();
+  // }, []);
+
+  const handleContinue = async () => {
+    setError("");
+    if (!email) {
+      setError("Email is required.");
+      return;
+    }
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+    try {
+      const result = await authService.SignIn({ email });
+      setHide1(false);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   const renderContent = () => {
     if (hide) {
       return (
         <div>
           {/* Title of the SignIn page */}
-          <div className="text-center text-[28px] ">
-            Join Medium.
-          </div>
+          <div className="text-center text-[28px] ">Join Medium.</div>
           {/* Container for the SignIn buttons */}
           <div className="flex justify-center items-center flex-col">
             {/* Google SignIn button */}
@@ -135,17 +159,24 @@ const SignIn = () => {
                     Your Email
                   </Label>
                   {/* Email input field */}
-                  <Input className="bg-primarygray95" type="email" id="email" />
-                </div>
+                  <Input
+                    className="bg-primarygray95"
+                    type="email"
+                    id="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  {error && <p className="text-red-600">{error}</p>}
+                </div>{" "}
               </div>
             </div>
 
             {/* Continue button */}
             <div className="mb-10">
               <Button
-                className="bg-primaryblack second-font rounded-full py-2 h-[40px] w-[250px]"
+                className="bg-primaryblack second-font rounded-full py-2 h-[40px] w-[100%]"
                 variant="mybutton"
-                onClick={() => setHide1(false)}
+                onClick={handleContinue}
               >
                 Continue
               </Button>

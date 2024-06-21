@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Loader from "@/Components/Common/Loader";
 
 function AuthLayout({ children, authentication = true }) {
   const navigate = useNavigate();
@@ -10,20 +11,14 @@ function AuthLayout({ children, authentication = true }) {
   useEffect(() => {
     if (authentication && authStatus !== authentication) {
       navigate("/");
-    } else if (!authentication && authStatus !== authentication) {
-      navigate("/");
       alert("Sign up or login");
+    } else if (!authentication && authStatus !== authentication) {
+      navigate("/UserNameInfo");
     }
     setLoader(false);
   }, [authentication, authStatus, navigate]);
 
-  return loader ? (
-    <div className="flex justify-center items-center h-screen">
-      <div className="loader"></div>
-    </div>
-  ) : (
-    <>{children}</>
-  );
+  return loader ? <Loader /> : <>{children}</>;
 }
 
 export default AuthLayout;

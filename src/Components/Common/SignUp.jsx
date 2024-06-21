@@ -1,17 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Icons from "./Icons";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { ChevronUp, LogIn } from "lucide-react";
-import authService from "../supabase/auth";
-import { useNavigate } from "react-router-dom";
+import authService from "../../supabase/auth";
 
 const SignUp = () => {
   const [hide, setHide] = useState(true);
   const [hide1, setHide1] = useState(true);
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    handleContinue();
+  }, []);
+
   const handleContinue = async () => {
     setError("");
     if (!email) {
@@ -202,7 +206,7 @@ const SignUp = () => {
             {/* Subtitle with instructions for the user */}
             <div className="mb-[25px]">
               <h1 className="font-medium text-base text-primaryblack second-font text-center">
-                Click the link we sent to <br /> {email} to sign in.{" "}
+                Click the link we sent to <br /> {email} to sign up.
               </h1>
             </div>
             <a href="/">
