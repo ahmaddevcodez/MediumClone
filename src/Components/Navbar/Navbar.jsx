@@ -84,30 +84,25 @@ const Navbar = () => {
                 </DialogContent>
               </Dialog>
             </ul>
-            {authentication ? (
-              Good
-            ) : (
-              <Dialog className="shadow-xl">
-                <DialogTrigger asChild>
-                  <Button
-                    className={cn(
-                      "rounded-full second-font transition-all duration-900 ease-in-sout",
-                      scrolled
-                        ? "bg-primarygreen hover:bg-primarydarkgreen"
-                        : ""
-                    )}
-                    variant="mybutton"
-                  >
-                    Get started
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-[670px] ">
-                  <DialogHeader>
-                    <SignUp />
-                  </DialogHeader>
-                </DialogContent>
-              </Dialog>
-            )}
+
+            <Dialog className="shadow-xl">
+              <DialogTrigger asChild>
+                <Button
+                  className={cn(
+                    "rounded-full second-font transition-all duration-900 ease-in-sout",
+                    scrolled ? "bg-primarygreen hover:bg-primarydarkgreen" : ""
+                  )}
+                  variant="mybutton"
+                >
+                  Get started
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[670px] ">
+                <DialogHeader>
+                  <SignUp />
+                </DialogHeader>
+              </DialogContent>
+            </Dialog>
           </div>
         </div>
       </div>

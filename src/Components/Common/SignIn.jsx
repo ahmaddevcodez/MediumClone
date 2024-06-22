@@ -4,18 +4,22 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { ChevronUp, LogIn } from "lucide-react";
+
 import authService from "../../supabase/auth";
-import { useNavigate } from "react-router-dom";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTrigger,
+} from "../../Components/ui/dialog.jsx";
+
+import SignUp from "../Common/SignUp";
 
 const SignIn = () => {
   const [hide, setHide] = useState(true);
   const [hide1, setHide1] = useState(true);
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
-
-  // useEffect(() => {
-  //   handleContinue();
-  // }, []);
 
   const handleContinue = async () => {
     setError("");
@@ -109,9 +113,18 @@ const SignIn = () => {
             <div className="pb-24">
               <h1 className="second-font">
                 Don't have an account?
-                <span className="text-primaryextradarkgreen ml-1 hover:text-primarydarkgreen font-semibold">
-                  Sign up
-                </span>
+                <Dialog className="shadow-xl">
+                  <DialogTrigger asChild>
+                    <span className="text-primaryextradarkgreen ml-1 cursor-pointer hover:text-primarydarkgreen font-semibold">
+                      Sign up
+                    </span>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-[670px] ">
+                    <DialogHeader>
+                      <SignUp />
+                    </DialogHeader>
+                  </DialogContent>
+                </Dialog>
               </h1>
             </div>
 

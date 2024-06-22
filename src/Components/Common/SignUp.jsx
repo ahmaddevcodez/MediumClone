@@ -5,6 +5,14 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { ChevronUp, LogIn } from "lucide-react";
 import authService from "../../supabase/auth";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTrigger,
+} from "../../Components/ui/dialog.jsx";
+
+import SignIn from "../Common/SignIn";
 
 const SignUp = () => {
   const [hide, setHide] = useState(true);
@@ -17,7 +25,6 @@ const SignUp = () => {
   }, []);
 
   const handleContinue = async () => {
-    setError("");
     if (!email) {
       setError("Email is required.");
       return;
@@ -88,12 +95,18 @@ const SignUp = () => {
             <div className="pb-36">
               <h1 className="second-font">
                 Already have an account?
-                <a
-                  href={<LogIn />}
-                  className="text-primaryextradarkgreen ml-1 hover:text-primarydarkgreen font-semibold"
-                >
-                  Sign in
-                </a>
+                <Dialog className="shadow-xl">
+                  <DialogTrigger asChild>
+                    <sapn className="text-primaryextradarkgreen ml-1 cursor-pointer hover:text-primarydarkgreen font-semibold">
+                      Sign in
+                    </sapn>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-[670px] ">
+                    <DialogHeader>
+                      <SignIn />
+                    </DialogHeader>
+                  </DialogContent>
+                </Dialog>
               </h1>
             </div>
 

@@ -3,7 +3,7 @@ import React from "react";
 const Loader = () => {
   return (
     <div>
-      <div className="flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center h-screen bg-primarybody">
         <div className="pyramid-loader">
           <div className="wrapper">
             <span className="side side1"></span>
