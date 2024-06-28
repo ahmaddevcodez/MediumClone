@@ -24,7 +24,7 @@ const Icons = {
     </svg>
   ),
   Apple: (props) => (
-    <svg width="24" height="24" viewBox="0 0 24 24" >
+    <svg width="24" height="24" viewBox="0 0 24 24">
       <path
         d="M18.52 8.23c-.1.09-2 1.18-2 3.62 0 2.82 2.4 3.82 2.48 3.84-.01.06-.38 1.37-1.27 2.7-.78 1.17-1.6 2.34-2.86 2.34-1.25 0-1.58-.75-3.02-.75-1.41 0-1.91.77-3.06.77-1.15 0-1.95-1.08-2.86-2.41A11.9 11.9 0 0 1 4 12.04C4 8.36 6.33 6.4 8.62 6.4c1.22 0 2.23.82 3 .82.73 0 1.86-.87 3.25-.87.52 0 2.4.05 3.65 1.88zm-4.31-3.45c.57-.7.98-1.67.98-2.65 0-.13-.01-.27-.04-.38-.93.04-2.04.64-2.7 1.44a4.2 4.2 0 0 0-1.02 2.58c0 .15.02.3.03.34.06.01.16.03.25.03.84 0 1.9-.58 2.5-1.36z"
         fill="currentColor"
@@ -104,6 +104,26 @@ const Icons = {
       <path
         d="M13.35 10.93l5.53-6.43h-1.31l-4.8 5.59L8.92 4.5H4.5l5.8 8.45-5.8 6.74h1.31l5.08-5.9 4.05 5.9h4.42l-6.01-8.76zm-1.8 2.09l-.59-.84-4.68-6.7H8.3l3.77 5.4.6.85 4.9 7.02h-2.01l-4.01-5.73z"
         fill="#242424"
+      ></path>
+    </svg>
+  ),
+  SearchBarIcons: (props) => (
+    <svg
+      width="17"
+      height="16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      role="img"
+      aria-labelledby="search"
+      className={`fill-current w-5 h-5 ${props.className}`}
+    >
+      <title id="search">Search Icon</title>
+      <path
+        d="M7.667 12.667A5.333 5.333 0 107.667 2a5.333 5.333 0 000 10.667zM14.334 14l-2.9-2.9"
+        stroke="currentColor"
+        strokeWidth="1.333"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       ></path>
     </svg>
   ),

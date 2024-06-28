@@ -6,15 +6,23 @@ import HomeHeader02 from "@/Components/HomePages/HomeHeader02";
 import HomeHeader03 from "@/Components/HomePages/HomeHeader03";
 import HomeHeader04 from "@/Components/HomePages/HomeHeader04";
 import Footer from "@/Components/Footer/Footer";
+import { useSelector } from "react-redux";
+import Dashboard from "./Dashboard";
 
-const Home = () => {
-  return (
+function Home() {
+  const isLoggedIn = useSelector((state) => state.auth.status);
+
+  return isLoggedIn ? (
+    <div className="dashboard">
+      <Dashboard />
+    </div>
+  ) : (
     <div className="main-home">
       <div className="mb-[0px]">
         <Navbar className="bg-primarybody" />
       </div>
       <HomeHeader />
-      <div className="2xl:block xl:block lg:block md:hidden hidden ">
+      <div className="2xl:block xl:block lg:block md:hidden hidden">
         <HomeHeader01 />
         <HomeHeader02 />
         <HomeHeader03 />
@@ -25,6 +33,6 @@ const Home = () => {
       </div>
     </div>
   );
-};
+}
 
 export default Home;

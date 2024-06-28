@@ -8,6 +8,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Home from "./Pages/Home.jsx";
 import UserNameInfo from "./Components/UserName/UserNameInfo.jsx";
 import AuthLayout from "./Pages/AuthLayout.jsx";
+import Search from "./Components/Dashboard/Search/SearchBar.jsx";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,14 @@ const router = createBrowserRouter([
         element: (
           <AuthLayout authentication={true}>
             <UserNameInfo />
+          </AuthLayout>
+        ),
+      },
+      {
+        path: "/Search",
+        element: (
+          <AuthLayout authentication={true}>
+            <Search />
           </AuthLayout>
         ),
       },
