@@ -78,19 +78,3 @@
   }
 }
 
-.main-home {
-  background-color: hsl(var(--mainbody));
-}
-
-.my-container {
-  width: 90%;
-  max-width: 1200px;
-  margin-inline: auto;
-  box-sizing: border-box;
-}
-
-.my-container-2 {
-  width: 95%;
-  margin-inline: auto;
-  box-sizing: border-box;
-}

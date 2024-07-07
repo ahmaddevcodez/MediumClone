@@ -17,8 +17,8 @@ import SignIn from "../Common/SignIn";
 const SignUp = () => {
   const [hide, setHide] = useState(true);
   const [hide1, setHide1] = useState(true);
-  const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     handleContinue();

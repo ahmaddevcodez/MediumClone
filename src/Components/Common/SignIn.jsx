@@ -233,8 +233,7 @@ const SignIn = () => {
             {/* Subtitle with instructions for the user */}
             <div className="mb-[25px]">
               <h1 className="font-medium text-base text-primaryblack second-font text-center">
-                Click the link we sent to <br /> ahmadTahir1399@gmail.com to
-                Sign in.{" "}
+                Click the link we sent to <br /> {email} to Sign in.
               </h1>
             </div>
             <a href="/">
