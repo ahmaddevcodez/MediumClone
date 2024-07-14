@@ -5,8 +5,9 @@ import {
   Ellipsis,
   MessageCircle,
 } from "lucide-react";
-import Icons from "../Common/Icons";
-import { Skeleton } from "../ui/skeleton";
+import Icons from "../../Common/Icons";
+import { Skeleton } from "../../ui/skeleton";
+import service from "../../../supabase/config";
 
 const BlogSkeleton = () => {
   return (
@@ -48,7 +49,24 @@ const BlogSkeleton = () => {
 };
 
 const Blog = () => {
+  const [description, setDescription] = useState("");
+  const [mainHeading, setMainHeading] = useState("");
+  const [name, setName] = useState([]);
+  const [charCount, setCharCount] = useState(0);
   const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const getUserName = async () => {
+      try {
+        const userNameData = await service.fetchUserName();
+        setName(userNameData);
+      } catch (error) {
+        console.error("Error fetching user name:", error);
+      }
+    };
+
+    getUserName();
+  }, []);
 
   useEffect(() => {
     // Simulate loading delay
@@ -71,14 +89,18 @@ const Blog = () => {
           />
           <div>
             <p className="second-font text-xs text-primaryblack font-medium">
-              Tari Ibaba
+              {name.map((user) => (
+                <span className="ml-1" key={user.id}>
+                  {user.full_name}
+                </span>
+              ))}
             </p>
           </div>
         </div>
 
         <div className="flex flex-col md:flex-row md:space-x-4">
           <div className="flex-grow">
-            <h1 className="text-[22px] font-extrabold mb-2 second-font tracking-tight w-[100%]">
+            <h1 className="text-[22px] font-extrabold mb-2 second-font tracking-tight w-[95%]">
               5 ways to write "natural" code everybody will love to read
             </h1>
             <p className="second-font text-primarylink mb-4 text-base">

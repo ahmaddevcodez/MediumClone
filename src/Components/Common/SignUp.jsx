@@ -5,6 +5,8 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { ChevronUp, LogIn } from "lucide-react";
 import authService from "../../supabase/auth";
+import { Link } from "react-router-dom";
+
 import {
   Dialog,
   DialogContent,
@@ -114,13 +116,13 @@ const SignUp = () => {
             <div className="flex justify-center items-center">
               <h1 className="second-font text-xs text-center text-primarylink">
                 Click “Sign up” to agree to Medium’s
-                <a href="#" className="underline">
+                <Link to="#" className="underline">
                   Terms of Service
-                </a>
+                </Link>
                 and acknowledge that <br /> Medium’s
-                <a href="#" className="underline">
+                <Link to="#" className="underline">
                   Privacy Policy
-                </a>
+                </Link>
                 applies to you.
               </h1>
             </div>
@@ -190,19 +192,19 @@ const SignUp = () => {
             <div className="flex justify-center items-center">
               <h1 className="second-font text-xs text-center text-primarylink leading-5">
                 This site is protected by reCAPTCHA Enterprise and the <br />
-                <a
-                  href="https://policies.google.com/privacy?source=register--------------------------lo_home_nav-----------"
+                <Link
+                  to="https://policies.google.com/privacy?source=register--------------------------lo_home_nav-----------"
                   className="underline"
                 >
                   Google Privacy Policy
-                </a>
+                </Link>
                 and
-                <a
-                  href="https://policies.google.com/terms?source=register--------------------------lo_home_nav-----------"
+                <Link
+                  to="https://policies.google.com/terms?source=register--------------------------lo_home_nav-----------"
                   className="underline"
                 >
                   Terms of Service
-                </a>
+                </Link>
                 apply.
               </h1>
             </div>
@@ -222,14 +224,14 @@ const SignUp = () => {
                 Click the link we sent to <br /> {email} to sign up.
               </h1>
             </div>
-            <a href="/">
+            <Link to="/">
               <Button
                 className="bg-primaryblack second-font rounded-full py-2 h-[40px] "
                 variant="mybutton"
               >
                 ok
               </Button>
-            </a>
+            </Link>
           </div>
         </div>
       );

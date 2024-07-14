@@ -1,8 +1,9 @@
-import SupabaseClient from "../lib/helper/SupabaseClient";
+// src/config.js
+import supabase from "../lib/helper/SupabaseClient";
 
-export class Service {
+class Service {
   constructor() {
-    this.client = SupabaseClient;
+    this.client = supabase;
   }
 
   async UserName(id, fullName) {
@@ -18,8 +19,38 @@ export class Service {
       }
       return { data };
     } catch (error) {
-      console.error("Error fetching userName:", error);
+      console.error("Error updating user name:", error);
       return { error };
+    }
+  }
+
+  async insertBlog(blogData) {
+    try {
+      const { data, error } = await this.client
+        .from("blogs")
+        .insert([blogData]);
+      if (error) {
+        throw error;
+      }
+      return data;
+    } catch (error) {
+      console.error("Error inserting blog:", error);
+      return { error };
+    }
+  }
+
+  async fetchUserName() {
+    try {
+      const { data, error } = await this.client
+        .from("profiles")
+        .select("full_name");
+      if (error) {
+        throw new Error(error.message);
+      }
+      return data;
+    } catch (error) {
+      console.error("Error fetching user name:", error);
+      return [];
     }
   }
 }

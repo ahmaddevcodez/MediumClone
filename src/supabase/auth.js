@@ -9,7 +9,7 @@ export class AuthService {
     const { data, error } = await this.client.auth.signInWithOtp({
       email: email,
       options: {
-        shouldCreateUser: true, // Allow user creation
+        shouldCreateUser: true,
         emailRedirectTo: "http://localhost:5173/UserNameInfo",
       },
     });
@@ -23,7 +23,7 @@ export class AuthService {
     const { data, error } = await this.client.auth.signInWithOtp({
       email: email,
       options: {
-        shouldCreateUser: true, // Allow user creation
+        shouldCreateUser: true,
         emailRedirectTo: "http://localhost:5173/",
       },
     });

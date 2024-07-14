@@ -1,6 +1,7 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import Logo from "../Common/Logo";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const FooterLinks = [
@@ -86,24 +87,24 @@ const Footer = () => {
           <ul className="lg:flex hidden gap-5 justify-center flex-wrap">
             {FooterLinks.map(({ id, name, link }) => (
               <li key={id} className="flex flex-wrap">
-                <a
-                  href={link}
+                <Link
+                  to={link}
                   className="second-font cursor-pointer text-sm font-medium text-primarylink"
                 >
                   {name}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
           <ul className="lg:hidden flex gap-5 justify-start flex-wrap  ">
             {FooterLinksforsmallandmedium.map(({ id, name, link }) => (
               <li key={id} className="flex flex-wrap">
-                <a
-                  href={link}
+                <Link
+                  to={link}
                   className="second-font cursor-pointer text-sm font-medium hover:underline text-primarywhite"
                 >
                   {name}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

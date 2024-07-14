@@ -11,6 +11,7 @@ import {
 } from "../ui/dialog";
 import SignIn from "../Common/SignIn";
 import SignUp from "../Common/SignUp";
+import { Link } from "react-router-dom";
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [authentication, setAuthentication] = useState(false);
@@ -47,12 +48,12 @@ const Navbar = () => {
             <ul className="flex gap-5">
               {links.map(({ link, id, name }) => (
                 <li key={id} className="lg:flex hidden">
-                  <a
-                    href={link}
+                  <Link
+                    to={link}
                     className="second-font cursor-pointer text-sm font-medium text-primarynav"
                   >
                     {name}
-                  </a>
+                  </Link>
                 </li>
               ))}
               <Dialog className="shadow-xl">

@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 const UserNameInfo = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState(null);
-  const [userId, setUserId] = useState(null); // State to store user ID
+  const [userId, setUserId] = useState(null);
   const [fullName, setFullName] = useState("");
   const [message, setMessage] = useState("");
 
@@ -19,7 +19,7 @@ const UserNameInfo = () => {
       setMessage("User ID not found.");
       return;
     }
-    const { data, error } = await service.UserName(userId, fullName); // Pass userId and fullName
+    const { data, error } = await service.UserName(userId, fullName);r6
     if (error) {
       setMessage(`Error updating user: ${error.message}`);
     } else {

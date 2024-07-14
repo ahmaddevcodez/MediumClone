@@ -13,7 +13,7 @@ function AuthLayout({ children, authentication = true }) {
       navigate("/");
       alert("Sign up or login");
     } else if (!authentication && authStatus !== authentication) {
-      navigate("/UserNameInfo");
+      navigate("/");
     }
     setLoader(false);
   }, [authentication, authStatus, navigate]);

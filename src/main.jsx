@@ -11,7 +11,7 @@ import Home from "./Pages/Home.jsx";
 import UserNameInfo from "./Components/UserName/UserNameInfo.jsx";
 import AuthLayout from "./Pages/AuthLayout.jsx";
 import Search from "./Components/Dashboard/Search/SearchBar.jsx";
-import NewStory from "./Components/Dashboard/New-Story/NewStory.jsx";
+import NewStory from "./Components/Dashboard/New-Story/New-Story.jsx";
 
 const router = createBrowserRouter([
   {

@@ -3,9 +3,33 @@
 
 body {
   font-family: gt-super, Georgia, Cambria, "Times New Roman", Times, serif;
-  height: 1000px;
+  overflow-y: scroll;
 }
 
+/* Styling for Webkit browsers (Chrome, Safari, etc.) */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Styling for Firefox */
+* {
+  scrollbar-width: none;
+  scrollbar-color: transparent transparent;
+}
 
 .second-font {
   font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -170,4 +194,23 @@ body {
 .dialog-publish {
   height: 100vh !important;
   width: 10000px !important;
+}
+
+.app-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+
+.side-info {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 20px;
+  height: calc(100vh - 40px);
+  overflow-y: auto;
+  scrollbar-width: none;
 }

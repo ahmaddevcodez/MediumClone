@@ -18,6 +18,7 @@ const SearchBar = () => {
             placeholder="Search"
             className="outline-none ml-1 border-none second-font w-full rounded-lg bg-primarylightergrey pl-11 "
           />
+          
         </div>
       </div>
     </div>

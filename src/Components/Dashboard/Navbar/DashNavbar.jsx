@@ -31,10 +31,10 @@ const DashNavbar = () => {
 
   return (
     <div className="border-b-[1px] border-primarygray95">
-      <div className="my-container-2 pt-3 pb-3 ">
+      <div className="my-container-2 py-3">
         <div className="flex justify-between items-center">
-          <div className="flex">
-            <Logo2 className="mr-4 mt-1 lg:w-[160px] md:w-[160px]  w-[120px]" />
+          <div className="flex items-center">
+            <Logo2 className="mr-4 w-[120px] md:w-[160px] lg:w-[160px]" />
             <form className="form relative">
               <div className="relative ml-auto flex-1 md:grow-0 lg:block hidden">
                 <Search className="stroke-[1.2] font-thin absolute left-4 top-2.5 h-5 w-5 text-muted-foreground" />
@@ -67,7 +67,7 @@ const DashNavbar = () => {
             <div className="hover:text-black">
               <Bell strokeWidth={1.1} className="hover:text-black" />
             </div>
-            <DashPopover /> {/* Use DashPopover component */}
+            <DashPopover />
           </div>
         </div>
       </div>

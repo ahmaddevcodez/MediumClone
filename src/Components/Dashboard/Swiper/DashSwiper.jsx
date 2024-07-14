@@ -43,25 +43,28 @@ const DashSwiper = () => {
   }, []);
 
   return (
-    <div className="relative">
-      <div ref={swiperRef} className="w-full">
+    <div className="">
+      <div ref={swiperRef} className="w-full relative">
         <div
-          className={`w-full transition-all duration-300 ${
-            isSticky ? "fixed top-0 left-0 right-0 z-50 bg-white shadow-md" : ""
+          className={`transition-all duration-300 ${
+            isSticky
+              ? "fixed top-0 left-0 right-0  z-50 bg-white shadow-md md:w-full w-full pb-1 rounded-md"
+              : ""
           }`}
         >
-          <div className="max-w-[750px] mx-auto">
+          <div className="max-w-[640px] mx-auto">
             <Swiper
               slidesPerView={6}
               navigation={true}
               modules={[Navigation]}
               className="mySwiper"
               breakpoints={{
-                180: { slidesPerView: 2, spaceBetween: 5 },
-                640: { slidesPerView: 3, spaceBetween: 5 },
+                100: { slidesPerView: 1, spaceBetween: 2 },
+                380: { slidesPerView: 1, spaceBetween: 5 },
+                640: { slidesPerView: 2, spaceBetween: 5 },
                 768: { slidesPerView: 4, spaceBetween: 5 },
                 1025: { slidesPerView: 4, spaceBetween: 5 },
-                1400: { slidesPerView: 6, spaceBetween: 10 },
+                1441: { slidesPerView: 5, spaceBetween: 10 },
               }}
             >
               {slides.map((slide, index) => (

@@ -4,12 +4,11 @@ import Logo2 from "../../Common/Logo2";
 import DashPopover from "../../Common/DashPopover";
 import { Button } from "../../ui/button";
 import { Ellipsis } from "lucide-react";
-import supabase from "../../../lib/helper/SupabaseClient";
-import "../../../supabase/config";
 import { Dialog, DialogContent, DialogTrigger } from "../../ui/dialog";
 import "react-quill/dist/quill.bubble.css";
 import { Skeleton } from "../../ui/skeleton";
 import { Link } from "react-router-dom";
+import service from "../../../supabase/config";
 
 const NewStory = () => {
   const [description, setDescription] = useState("");
@@ -37,7 +36,6 @@ const NewStory = () => {
       e.target.value = text.slice(0, maxChars);
     }
   };
-
   const isContentEmpty = () => {
     return (
       mainHeading.trim() === "" ||
@@ -46,25 +44,18 @@ const NewStory = () => {
   };
 
   useEffect(() => {
-    const fetchUserName = async () => {
+    const getUserName = async () => {
       try {
-        const { data, error } = await supabase
-          .from("profiles")
-          .select("full_name");
-        if (error) {
-          throw new Error(error.message);
-        }
-        if (data && data.length > 0) {
-          setName(data);
-        }
+        const userNameData = await service.fetchUserName();
+        setName(userNameData);
+        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching user name:", error);
-      } finally {
         setIsLoading(false);
       }
     };
 
-    fetchUserName();
+    getUserName();
   }, []);
 
   if (isLoading) {
@@ -96,8 +87,8 @@ const NewStory = () => {
     <div>
       <div className="my-container-3 pt-5 flex justify-between items-center pb-10">
         <div className="flex items-center">
-          <Logo2 className="lg:w-[130px] lg:h-[35px] md:w-[130px] md:h-[35px] w-[100px] h-[35px]" />
-          <h1 className="second-font text-sm tracking-wide">
+          <Logo2 className="lg:block md:block hidden" />
+          <h1 className="second-font text-sm tracking-wide ml-2 mt-4">
             Draft in
             {name.map((user) => (
               <span className="ml-1" key={user.id}>
