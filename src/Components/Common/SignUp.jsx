@@ -12,7 +12,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTrigger,
-} from "../../Components/ui/dialog.jsx";
+} from "../ui/dialog";
 
 import SignIn from "../Common/SignIn";
 

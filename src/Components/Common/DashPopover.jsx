@@ -42,7 +42,6 @@ const DashPopover = () => {
     navigate("/");
   };
 
- 
   return (
     <div className="border-b-[1px] border-primarygray95">
       <div>

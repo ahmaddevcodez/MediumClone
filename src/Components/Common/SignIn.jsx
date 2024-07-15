@@ -11,7 +11,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTrigger,
-} from "../../Components/ui/dialog.jsx";
+} from "../ui/dialog";
 
 import SignUp from "../Common/SignUp";
 
