@@ -1,8 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "react-quill/dist/quill.bubble.css";
 import App from "./App";
-
 import "./index.css";
 import { Provider } from "react-redux";
 import store from "./store/store";
@@ -12,6 +10,7 @@ import UserNameInfo from "./Components/UserName/UserNameInfo";
 import AuthLayout from "./Pages/AuthLayout";
 import Search from "./Components/Dashboard/Search/SearchBar";
 import NewStory from "./Components/Dashboard/New-Story/New-Story";
+import "react-quill/dist/quill.bubble.css";
 
 const router = createBrowserRouter([
   {
@@ -50,7 +49,8 @@ const router = createBrowserRouter([
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
   <React.StrictMode>
     <Provider store={store}>
       <RouterProvider router={router} />
