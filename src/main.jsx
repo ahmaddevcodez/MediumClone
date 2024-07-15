@@ -1,17 +1,17 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
 import "react-quill/dist/quill.bubble.css";
-import App from "./App.jsx";
+import App from "./App";
 
 import "./index.css";
 import { Provider } from "react-redux";
-import store from "./store/store.js";
+import store from "./store/store";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import Home from "./Pages/Home.jsx";
-import UserNameInfo from "./Components/UserName/UserNameInfo.jsx";
-import AuthLayout from "./Pages/AuthLayout.jsx";
-import Search from "./Components/Dashboard/Search/SearchBar.jsx";
-import NewStory from "./Components/Dashboard/New-Story/New-Story.jsx";
+import Home from "./Pages/Home";
+import UserNameInfo from "./Components/UserName/UserNameInfo";
+import AuthLayout from "./Pages/AuthLayout";
+import Search from "./Components/Dashboard/Search/SearchBar";
+import NewStory from "./Components/Dashboard/New-Story/New-Story";
 
 const router = createBrowserRouter([
   {
