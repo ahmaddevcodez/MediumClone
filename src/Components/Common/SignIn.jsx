@@ -24,7 +24,7 @@ const SignIn = () => {
   const handleContinue = async () => {
     setError("");
     if (!email) {
-      setError("Email is required.");
+      setError("");
       return;
     }
     if (!/\S+@\S+\.\S+/.test(email)) {

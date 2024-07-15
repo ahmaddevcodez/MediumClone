@@ -28,7 +28,7 @@ const SignUp = () => {
 
   const handleContinue = async () => {
     if (!email) {
-      setError("Email is required.");
+      setError("");
       return;
     }
     if (!/\S+@\S+\.\S+/.test(email)) {

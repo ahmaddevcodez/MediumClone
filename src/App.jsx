@@ -9,7 +9,6 @@ import Loader from "./Components/Common/Loader";
 function App() {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector((state) => state.auth.status);
 
   useEffect(() => {
     authService
@@ -28,17 +27,6 @@ function App() {
     return <Loader />;
   }
 
-  // return isLoggedIn ? (
-  //   <div className="dashboard">
-  //     <h1>Welcome to Dashboard</h1>
-  //   </div>
-  // ) : (
-  //   <div className="w-full">
-  //     <main>
-  //       <Outlet />
-  //     </main>
-  //   </div>
-  // );
   return (
     <div className="w-full">
       <main>
