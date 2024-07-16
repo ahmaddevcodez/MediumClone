@@ -24,21 +24,6 @@ class Service {
     }
   }
 
-  async insertBlog(blogData) {
-    try {
-      const { data, error } = await this.client
-        .from("blogs")
-        .insert([blogData]);
-      if (error) {
-        throw error;
-      }
-      return data;
-    } catch (error) {
-      console.error("Error inserting blog:", error);
-      return { error };
-    }
-  }
-
   async fetchUserName() {
     try {
       const { data, error } = await this.client
@@ -51,6 +36,20 @@ class Service {
     } catch (error) {
       console.error("Error fetching user name:", error);
       return [];
+    }
+  }
+  async insertBlog(blogData) {
+    try {
+      const { data, error } = await this.client
+        .from("blogs")
+        .insert([blogData]);
+      if (error) {
+        throw error;
+      }
+      return data;
+    } catch (error) {
+      console.error("Error inserting blog:", error);
+      return { error };
     }
   }
 }
