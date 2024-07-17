@@ -11,20 +11,22 @@ import { Link } from "react-router-dom";
 import service from "../../../supabase/config";
 
 const NewStory = () => {
-  const [description, setDescription] = useState("");
   const [mainHeading, setMainHeading] = useState("");
   const [name, setName] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [charCount, setCharCount] = useState(0);
+  const [Title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [previewTitle, setPreviewTitle] = useState("");
+  const [previewDescription, setPreviewDescription] = useState("");
+  const [publishMessage, setPublishMessage] = useState("");
+  const [isPublishing, setIsPublishing] = useState(false);
+  // const [topics, setTopics] = useState("");
 
   const maxChars = 140;
 
   const handleMainHeadingChange = (e) => {
     setMainHeading(e.target.value);
-  };
-
-  const handleDescriptionChange = (content) => {
-    setDescription(content);
   };
 
   const handleInputChange = (e) => {
@@ -36,6 +38,7 @@ const NewStory = () => {
       e.target.value = text.slice(0, maxChars);
     }
   };
+
   const isContentEmpty = () => {
     return (
       mainHeading.trim() === "" ||
@@ -43,14 +46,67 @@ const NewStory = () => {
     );
   };
 
+  const handleTitleChange = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleDescriptionChange = (content) => {
+    setDescription(content);
+  };
+
+  const handlePreviewTitleChange = (e) => {
+    setPreviewTitle(e.target.value);
+  };
+
+  const handlePublish = async (e) => {
+    e.preventDefault(); // Prevent form submission if needed
+    setIsPublishing(true);
+    setPublishMessage("");
+
+    try {
+      if (
+        mainHeading.trim() === "" ||
+        description.replace(/<[^>]*>/g, "").trim() === ""
+      ) {
+        throw new Error("Main heading or description cannot be empty.");
+      }
+
+      const blogData = {
+        heading: mainHeading,
+        descriptionpreview:
+          previewDescription ||
+          description.replace(/<[^>]*>/g, "").slice(0, maxChars),
+        maincontent: description,
+        slug: mainHeading
+          .toLowerCase()
+          .replace(/\s+/g, "-")
+          .replace(/[^\w-]+/g, ""),
+        headingpreview: previewTitle,
+      };
+
+      const result = await service.insertBlog(blogData);
+
+      // if (result.error) {
+      //   throw result.error;
+      // }
+
+      setPublishMessage("Blog published successfully!");
+    } catch (error) {
+      console.error("Error publishing blog:", error);
+      setPublishMessage("Failed to publish blog. Please try again.");
+    } finally {
+      setIsPublishing(false);
+    }
+  };
+
   useEffect(() => {
     const getUserName = async () => {
       try {
         const userNameData = await service.fetchUserName();
         setName(userNameData);
-        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching user name:", error);
+      } finally {
         setIsLoading(false);
       }
     };
@@ -91,7 +147,7 @@ const NewStory = () => {
           <h1 className="second-font text-sm tracking-wide ml-2 mt-4">
             Draft in
             {name.map((user) => (
-              <span className="ml-1" key={user.id}>
+              <span className="ml-1 font-semibold" key={user.id}>
                 {user.full_name}
               </span>
             ))}
@@ -111,6 +167,7 @@ const NewStory = () => {
                   disabled={isContentEmpty()}
                   onClick={(e) => {
                     if (isContentEmpty()) {
+                      e.stopPropagation(); // Ensure proper event handling
                       e.preventDefault();
                     }
                   }}
@@ -133,6 +190,8 @@ const NewStory = () => {
                     <input
                       placeholder="Write a preview title"
                       className="text-xl outline-none second-font text-primarydarkbrown font-semibold mb-1 w-full"
+                      onChange={handlePreviewTitleChange}
+                      value={previewTitle}
                     />
                     <div className="border-t-[1px] border-b-[1px] border-primarygreyBombay opacity-75">
                       <input
@@ -184,10 +243,17 @@ const NewStory = () => {
                       <Button
                         className="text-primarywhite bg-primarydarkgreen hover:bg-primarydarkergreen rounded-full second-font transition-all duration-900 ease-in-sout"
                         variant="mybutton"
+                        onClick={handlePublish}
+                        disabled={isPublishing}
                       >
-                        Publish now
+                        {isPublishing ? "Publishing..." : "Publish now"}
                       </Button>
                     </div>
+                    {publishMessage && (
+                      <p className="mt-2 text-sm font-semibold text-center">
+                        {publishMessage}
+                      </p>
+                    )}
                   </div>
                 </div>
               </DialogContent>

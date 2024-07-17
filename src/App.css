@@ -186,12 +186,12 @@ body {
 
 .ql-editor.ql-blank::before {
   color: #b3b3b1 !important;
-  font-style: normal;
+  font-style: normal !important;
   font-family: gt-super, Georgia, Cambria, "Times New Roman", Times, serif !important;
-  padding-right: -100px;
+  padding-right: -100px !important;
 }
 
-.dialog-publish {
+.dialog-publish { 
   height: 100vh !important;
   width: 10000px !important;
 }
