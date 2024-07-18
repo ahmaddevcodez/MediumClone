@@ -12,6 +12,8 @@ import Search from "./Components/Dashboard/Search/SearchBar";
 import NewStory from "./Components/Dashboard/New-Story/New-Story";
 import "react-quill/dist/quill.bubble.css";
 
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -51,9 +53,7 @@ const router = createBrowserRouter([
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
-  </>
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
 );

@@ -5,23 +5,57 @@ import DashPopover from "../../Common/DashPopover";
 import { Button } from "../../ui/button";
 import { Ellipsis } from "lucide-react";
 import { Dialog, DialogContent, DialogTrigger } from "../../ui/dialog";
-import "react-quill/dist/quill.bubble.css";
 import { Skeleton } from "../../ui/skeleton";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import service from "../../../supabase/config";
+import { toast, Toaster } from "react-hot-toast";
+
+const modules = {
+  toolbar: [
+    [{ header: [1, 2, 3, false] }],
+    ["bold", "italic", "underline", "strike"],
+    ["blockquote", "code-block"],
+    [{ list: "ordered" }, { list: "bullet" }],
+    [{ script: "sub" }, { script: "super" }],
+    [{ indent: "-1" }, { indent: "+1" }],
+    [{ direction: "rtl" }],
+    [{ color: [] }, { background: [] }],
+    ["link", "image"],
+    ["clean"],
+  ],
+};
+
+const formats = [
+  "header",
+  "bold",
+  "italic",
+  "underline",
+  "strike",
+  "blockquote",
+  "code-block",
+  "list",
+  "bullet",
+  "script",
+  "indent",
+  "direction",
+  "color",
+  "background",
+  "link",
+  "image",
+];
 
 const NewStory = () => {
+  const navigate = useNavigate();
   const [mainHeading, setMainHeading] = useState("");
   const [name, setName] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [charCount, setCharCount] = useState(0);
-  const [Title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
   const [previewDescription, setPreviewDescription] = useState("");
   const [publishMessage, setPublishMessage] = useState("");
   const [isPublishing, setIsPublishing] = useState(false);
-  // const [topics, setTopics] = useState("");
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const maxChars = 140;
 
@@ -33,10 +67,7 @@ const NewStory = () => {
     const text = e.target.value;
     const newCharCount = text.length;
     setCharCount(newCharCount > maxChars ? maxChars : newCharCount);
-
-    if (newCharCount > maxChars) {
-      e.target.value = text.slice(0, maxChars);
-    }
+    setPreviewDescription(text.slice(0, maxChars));
   };
 
   const isContentEmpty = () => {
@@ -46,8 +77,8 @@ const NewStory = () => {
     );
   };
 
-  const handleTitleChange = (e) => {
-    setTitle(e.target.value);
+  const isPreviewEmpty = () => {
+    return previewTitle.trim() === "" || previewDescription.trim() === "";
   };
 
   const handleDescriptionChange = (content) => {
@@ -59,41 +90,39 @@ const NewStory = () => {
   };
 
   const handlePublish = async (e) => {
-    e.preventDefault(); // Prevent form submission if needed
+    e.preventDefault();
     setIsPublishing(true);
     setPublishMessage("");
 
     try {
-      if (
-        mainHeading.trim() === "" ||
-        description.replace(/<[^>]*>/g, "").trim() === ""
-      ) {
-        throw new Error("Main heading or description cannot be empty.");
+      if (isContentEmpty() || isPreviewEmpty()) {
+        throw new Error("All fields must be filled out before publishing.");
       }
 
       const blogData = {
         heading: mainHeading,
-        descriptionpreview:
-          previewDescription ||
-          description.replace(/<[^>]*>/g, "").slice(0, maxChars),
+        descriptionpreview: previewDescription.trim(),
         maincontent: description,
         slug: mainHeading
           .toLowerCase()
           .replace(/\s+/g, "-")
           .replace(/[^\w-]+/g, ""),
-        headingpreview: previewTitle,
+        headingpreview: previewTitle.trim(),
       };
 
       const result = await service.insertBlog(blogData);
-
-      // if (result.error) {
-      //   throw result.error;
-      // }
+      console.log(result);
 
       setPublishMessage("Blog published successfully!");
+      toast.success("Blog published successfully!");
+
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
     } catch (error) {
       console.error("Error publishing blog:", error);
       setPublishMessage("Failed to publish blog. Please try again.");
+      toast.error("Failed to publish blog. Please try again.");
     } finally {
       setIsPublishing(false);
     }
@@ -106,6 +135,7 @@ const NewStory = () => {
         setName(userNameData);
       } catch (error) {
         console.error("Error fetching user name:", error);
+        toast.error("Failed to fetch user name. Please try again.");
       } finally {
         setIsLoading(false);
       }
@@ -141,6 +171,7 @@ const NewStory = () => {
 
   return (
     <div>
+      <Toaster position="top-right" />
       <div className="my-container-3 pt-5 flex justify-between items-center pb-10">
         <div className="flex items-center">
           <Logo2 className="lg:block md:block hidden" />
@@ -155,7 +186,11 @@ const NewStory = () => {
         </div>
         <div className="flex items-center">
           <div>
-            <Dialog className="dialog-publish">
+            <Dialog
+              className="dialog-publish overflow-scroll"
+              open={isDialogOpen}
+              onOpenChange={setIsDialogOpen}
+            >
               <DialogTrigger asChild>
                 <Button
                   variant="mybutton"
@@ -165,10 +200,9 @@ const NewStory = () => {
                       : "bg-primarygreen hover:bg-primarygreen"
                   }`}
                   disabled={isContentEmpty()}
-                  onClick={(e) => {
-                    if (isContentEmpty()) {
-                      e.stopPropagation(); // Ensure proper event handling
-                      e.preventDefault();
+                  onClick={() => {
+                    if (!isContentEmpty()) {
+                      setIsDialogOpen(true);
                     }
                   }}
                 >
@@ -176,8 +210,8 @@ const NewStory = () => {
                 </Button>
               </DialogTrigger>
               <DialogContent className="dialog-publish max-w-[100vw] xl:h-screen w-fit p-8">
-                <div className="flex lg:flex-row flex-col gap-20 justify-center items-stretch">
-                  <div className="flex flex-col pt-20 justfy-center max-w-[440px] w-full">
+                <div className="flex lg:flex-row flex-col lg:gap-20 md:gap-0 gap-0 justify-center items-center">
+                  <div className="flex flex-col lg:pt-20 md:pt-1 pt-1 justfy-center max-w-[440px] w-full">
                     <h2 className="second-font text-primarydarkblack font-semibold mb-3 text-xl">
                       Story Preview
                     </h2>
@@ -195,9 +229,10 @@ const NewStory = () => {
                     />
                     <div className="border-t-[1px] border-b-[1px] border-primarygreyBombay opacity-75">
                       <input
-                        placeholder="Write a preview description  "
+                        placeholder="Write a preview description"
                         className="outline-none second-font text-primarydarkbrown pt-3 font-medium mb-1 w-full"
                         onChange={handleInputChange}
+                        value={previewDescription}
                         maxLength={maxChars}
                       />
                       <div className="text-[10px] second-font text-primarylightgrey text-left">
@@ -233,6 +268,7 @@ const NewStory = () => {
                       <Link
                         to="https://help.medium.com/hc/en-us/articles/360018677974-What-happens-to-your-post-when-you-publish-on-Medium"
                         target="_blank"
+                        rel="noopener noreferrer"
                         className="underline text-primarydustygrey text-sm"
                       >
                         Learn more
@@ -244,7 +280,7 @@ const NewStory = () => {
                         className="text-primarywhite bg-primarydarkgreen hover:bg-primarydarkergreen rounded-full second-font transition-all duration-900 ease-in-sout"
                         variant="mybutton"
                         onClick={handlePublish}
-                        disabled={isPublishing}
+                        disabled={isPublishing || isPreviewEmpty()}
                       >
                         {isPublishing ? "Publishing..." : "Publish now"}
                       </Button>
@@ -279,6 +315,8 @@ const NewStory = () => {
           onChange={handleDescriptionChange}
           placeholder="Tell Your Story..."
           className="text-4xl outline-none w-full write mt-3"
+          modules={modules}
+          formats={formats}
         />
       </div>
     </div>

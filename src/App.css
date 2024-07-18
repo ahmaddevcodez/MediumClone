@@ -27,8 +27,8 @@ body {
 
 /* Styling for Firefox */
 * {
-  scrollbar-width: none;
-  scrollbar-color: transparent transparent;
+  scrollbar-width: thin;
+  scrollbar-color: #34aa45 transparent;
 }
 
 .second-font {
@@ -165,16 +165,7 @@ body {
   line-height: 1 !important;
 }
 
-/* .swiper-button-disabled {
-  opacity: 0 !important;
-} */
 
-/* .swiper-slide img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-} */
 .write .ql-editor {
   font-size: 1.2rem !important;
   padding: 0 !important;
@@ -191,9 +182,10 @@ body {
   padding-right: -100px !important;
 }
 
-.dialog-publish { 
+.dialog-publish {
   height: 100vh !important;
-  width: 10000px !important;
+  width: 100vw !important;
+  overflow: scroll;
 }
 
 .app-container {
