@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
-import authService from "../../supabase/auth";
-import { SignOut } from "../../store/authSlice";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { UserRound, BookMarked, ScrollText } from "lucide-react";
+import authService from "../../supabase/auth";
+import { SignOut } from "../../store/authSlice";
 
 const menuItems = [
   { label: "Profile", icon: UserRound, link: "#" },

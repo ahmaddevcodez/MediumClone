@@ -24,6 +24,8 @@ const SignUp = () => {
 
   useEffect(() => {
     handleContinue();
+
+
   }, []);
 
   const handleContinue = async () => {

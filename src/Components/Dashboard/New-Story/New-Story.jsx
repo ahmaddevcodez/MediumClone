@@ -9,6 +9,7 @@ import { Skeleton } from "../../ui/skeleton";
 import { Link, useNavigate } from "react-router-dom";
 import service from "../../../supabase/config";
 import { toast, Toaster } from "react-hot-toast";
+import authService from "../../../supabase/auth";
 
 const modules = {
   toolbar: [
@@ -56,6 +57,7 @@ const NewStory = () => {
   const [publishMessage, setPublishMessage] = useState("");
   const [isPublishing, setIsPublishing] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [id, setId] = useState("");
 
   const maxChars = 140;
 
@@ -108,6 +110,11 @@ const NewStory = () => {
           .replace(/\s+/g, "-")
           .replace(/[^\w-]+/g, ""),
         headingpreview: previewTitle.trim(),
+        author_id: id,
+        author_name: name
+          .filter((user) => user.full_name)
+          .map((user) => user.full_name)
+          .join(", "), // Convert to string
       };
 
       const result = await service.insertBlog(blogData);
@@ -144,6 +151,23 @@ const NewStory = () => {
     getUserName();
   }, []);
 
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const user = await authService.getUser();
+        if (user) {
+          setId(user.id);
+        } else {
+          console.error("No user found");
+        }
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
   if (isLoading) {
     return (
       <div>
@@ -177,11 +201,13 @@ const NewStory = () => {
           <Logo2 className="lg:block md:block hidden" />
           <h1 className="second-font text-sm tracking-wide ml-2 mt-4">
             Draft in
-            {name.map((user) => (
-              <span className="ml-1 font-semibold" key={user.id}>
-                {user.full_name}
-              </span>
-            ))}
+            {name
+              .filter((user) => user.full_name)
+              .map((user) => (
+                <span className="ml-1 font-semibold" key={user.id}>
+                  {user.full_name}
+                </span>
+              ))}
           </h1>
         </div>
         <div className="flex items-center">
@@ -252,9 +278,11 @@ const NewStory = () => {
                         {" "}
                         Publishing to:{" "}
                       </span>
-                      {name.map((user) => (
-                        <span key={user.id}>{user.full_name}</span>
-                      ))}
+                      {name
+                        .filter((user) => user.full_name)
+                        .map((user) => (
+                          <span key={user.id}>{user.full_name}</span>
+                        ))}
                     </h2>
                     <p className="text-sm mb-2 second-font">
                       Add or change topics (up to 5) so readers know what your

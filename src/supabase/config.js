@@ -38,11 +38,10 @@ class Service {
       return [];
     }
   }
+
   async insertBlog(blogData) {
     try {
-      const { data, error } = await this.client
-        .from("blog")
-        .insert([blogData]);
+      const { data, error } = await this.client.from("blog").insert([blogData]);
       if (error) {
         throw error;
       }

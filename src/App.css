@@ -6,6 +6,11 @@ body {
   overflow-y: scroll;
 }
 
+.second-font {
+  font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+}
+
 /* Styling for Webkit browsers (Chrome, Safari, etc.) */
 ::-webkit-scrollbar {
   width: 12px;
@@ -31,10 +36,6 @@ body {
   scrollbar-color: #34aa45 transparent;
 }
 
-.second-font {
-  font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-}
 
 .main-home {
   background-color: hsl(var(--mainbody));

@@ -19,7 +19,7 @@ const UserNameInfo = () => {
       setMessage("User ID not found.");
       return;
     }
-    const { data, error } = await service.UserName(userId, fullName);r6
+    const { data, error } = await service.UserName(userId, fullName);
     if (error) {
       setMessage(`Error updating user: ${error.message}`);
     } else {
